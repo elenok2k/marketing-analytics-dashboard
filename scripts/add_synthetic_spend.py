@@ -3,22 +3,17 @@ import sqlite3
 import pandas as pd
 import os
 
-print("=" * 60)
-print("📊 ГЕНЕРАЦИЯ РЕАЛИСТИЧНЫХ РАСХОДОВ (ROAS 1.0–2.0)")
-print("=" * 60)
-
 db_path = 'data/marketing.db'
 
 if not os.path.exists(db_path):
-    print(f"❌ База данных не найдена: {db_path}")
+    print(f"База данных не найдена: {db_path}")
     exit()
 
 conn = sqlite3.connect(db_path)
 
-# Удаляем старую таблицу
+
 conn.execute("DROP TABLE IF EXISTS campaign_marketing_metrics")
 
-# Создаём новую с расходами 50–100% от выручки
 print("\n📊 Создание таблицы campaign_marketing_metrics...")
 
 create_query = """
@@ -73,10 +68,6 @@ FROM campaign_revenue cr
 conn.execute(create_query)
 conn.commit()
 
-print("✅ Таблица campaign_marketing_metrics создана!")
-
-# Проверяем результат
-print("\n📊 Проверка расходов по каналам:")
 
 check_query = """
 SELECT 
@@ -95,8 +86,6 @@ ORDER BY avg_spend DESC
 check_df = pd.read_sql_query(check_query, conn)
 print(check_df.to_string(index=False))
 
-# Проверяем ROAS
-print("\n📊 Новый ROAS по каналам (должен быть 1.0–2.0):")
 
 roas_query = """
 SELECT 
@@ -116,7 +105,3 @@ print(roas_df.to_string(index=False))
 
 conn.close()
 
-print("\n" + "=" * 60)
-print("🎉 ГОТОВО!")
-print("📊 Теперь ROAS должен быть в диапазоне 1.0–2.0")
-print("📌 Запусти create_efficiency_metrics.py, чтобы пересчитать метрики.")

@@ -27,25 +27,14 @@ for table in tables:
     try:
         df = pd.read_sql_query(f"SELECT * FROM {table}", conn)
 
-        # -----------------------------
-        # 1. CLEAN DATA
-        # -----------------------------
-
         df = df.replace(["NULL", "null", "", "None"], None)
 
-        # -----------------------------
-        # 2. FORCE NUMERIC CONVERSION
-        # -----------------------------
 
         for col in df.columns:
 
             if df[col].dtype == "object":
 
                 df[col] = pd.to_numeric(df[col], errors="ignore")
-
-        # -----------------------------
-        # 3. EXPORT (ВАЖНО: decimal=",")
-        # -----------------------------
 
         file_path = os.path.join(
             OUTPUT_DIR,
@@ -58,12 +47,7 @@ for table in tables:
             decimal=","   # 👈 КЛЮЧЕВО ДЛЯ РУССКОЙ ЛОКАЛИ
         )
 
-        print(f"✅ Saved: {file_path}")
-        print(f"   Rows: {len(df)} | Cols: {len(df.columns)}")
-
     except Exception as e:
-        print(f"❌ Error in {table}: {e}")
+        print(f"Error in {table}: {e}")
 
 conn.close()
-
-print("\n🎉 EXPORT COMPLETED (RU LOCALE SAFE)")

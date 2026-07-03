@@ -8,14 +8,10 @@ os.makedirs("exports", exist_ok=True)
 db_path = "data/marketing.db"
 
 if not os.path.exists(db_path):
-    print(f"❌ База данных не найдена: {db_path}")
+    print(f"База данных не найдена: {db_path}")
     exit()
 
 conn = sqlite3.connect(db_path)
-
-print("=" * 60)
-print("📊 РАСЧЕТ ЭФФЕКТИВНОСТИ КАМПАНИЙ")
-print("=" * 60)
 
 conn.execute("DROP TABLE IF EXISTS efficiency_metrics")
 
