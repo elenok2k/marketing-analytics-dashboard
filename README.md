@@ -61,13 +61,11 @@
 
 ## 📸 Дашборд
 
-![Дашборд — страница 1](dashboard/1.png)
+![Дашборд — страница 1](dashboard/1.PNG)
 
-![Дашборд — страница 2](dashboard/2.png)
+![Дашборд — страница 2](dashboard/2.PNG)
 
-**Скачать дашборд:**
-- [📊 Power BI файл (.pbix)](dashboard/marketing_dashboard.pbix)
-- [📄 PDF-версия](dashboard/marketing_dashboard.pdf)
+
 
 ---
 
