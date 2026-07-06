@@ -19,10 +19,6 @@ data/
 *.parquet
 
 
-dashboard/*.png
-dashboard/*.html
-dashboard/*.pdf
-
 # OS
 Thumbs.db
 Desktop.ini
