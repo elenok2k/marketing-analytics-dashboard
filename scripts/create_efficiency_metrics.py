@@ -8,7 +8,6 @@ os.makedirs("exports", exist_ok=True)
 db_path = "data/marketing.db"
 
 if not os.path.exists(db_path):
-    print(f"База данных не найдена: {db_path}")
     exit()
 
 conn = sqlite3.connect(db_path)
@@ -73,9 +72,7 @@ ORDER BY roas DESC
 conn.execute(create_query)
 conn.commit()
 
-print("✅ Таблица efficiency_metrics создана")
 
-# Смотрим новые ROAS
 summary = pd.read_sql_query("""
 SELECT 
     channel,
@@ -92,13 +89,10 @@ GROUP BY channel
 ORDER BY avg_roas DESC
 """, conn)
 
-print("\n📊 Channel Summary (ROAS теперь реалистичный!):")
 print(summary.to_string(index=False))
 
 # Сохраняем в CSV
 metrics = pd.read_sql_query("SELECT * FROM efficiency_metrics", conn)
 metrics.to_csv("exports/efficiency_metrics.csv", index=False)
-print("\n✅ CSV обновлён")
 
 conn.close()
-print("\n🎉 ГОТОВО! Теперь ROAS должен быть в диапазоне 1–3.")

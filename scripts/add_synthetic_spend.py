@@ -14,8 +14,6 @@ conn = sqlite3.connect(db_path)
 
 conn.execute("DROP TABLE IF EXISTS campaign_marketing_metrics")
 
-print("\n📊 Создание таблицы campaign_marketing_metrics...")
-
 create_query = """
 CREATE TABLE campaign_marketing_metrics AS
 WITH campaign_revenue AS (

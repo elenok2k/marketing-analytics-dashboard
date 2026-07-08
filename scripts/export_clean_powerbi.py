@@ -22,7 +22,7 @@ tables = [
 
 for table in tables:
 
-    print(f"\n📤 Exporting {table}...")
+    print(f"\nExporting {table}...")
 
     try:
         df = pd.read_sql_query(f"SELECT * FROM {table}", conn)
