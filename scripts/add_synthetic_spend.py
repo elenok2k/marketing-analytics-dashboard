@@ -6,7 +6,6 @@ import os
 db_path = 'data/marketing.db'
 
 if not os.path.exists(db_path):
-    print(f"База данных не найдена: {db_path}")
     exit()
 
 conn = sqlite3.connect(db_path)
